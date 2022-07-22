@@ -1,14 +1,6 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core';
-import { DashboardCardContainer } from '../dashboard-card/dashboard-card.container';
-import { dashboardCards } from '../dashboard-cards';
-import { DashboardOutletDirective } from '../directives/dashboard-outlet.directive';
-import { Item } from '../models/item';
+import { ChangeDetectorRef, Component, OnInit, Type } from '@angular/core';
+import { dashboardCardsRegistry } from '../dashboard-cards-registry';
+
 import { Track } from '../models/track';
 
 @Component({
@@ -17,20 +9,17 @@ import { Track } from '../models/track';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  @ViewChildren(DashboardOutletDirective)
-  dashboardOutlet: QueryList<DashboardOutletDirective>;
-
   tracks: Track[] = [
     {
       items: [
-        { id: 'ASSET_DETAIL', component: 'Asset detail 1' },
-        { id: 'ASSET_DETAIL', component: 'Asset detail 2' },
+        { component: 'AssetDetailComponent' },
+        { component: 'AssetDetailComponent' },
       ],
     },
     {
       items: [
-        { id: 'TICKET', component: 'Ticket detail 1' },
-        { id: 'TICKET', component: 'Ticket detail 1' },
+        { component: 'TicketDetailComponent' },
+        { component: 'TicketDetailComponent' },
       ],
     },
   ];
@@ -39,33 +28,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
-    this.loadContents();
+  mapToComponent(component: string): Type<any> {
+    return dashboardCardsRegistry[component];
   }
-
-  loadContents = () => {
-    if (!this.dashboardOutlet || !this.dashboardOutlet.length) {
-      return;
-    }
-
-    this.dashboardOutlet.forEach((template) => {
-      this.cd.detectChanges();
-      this.loadContent(template, template.item);
-    });
-    this.cd.detectChanges();
-  };
-
-  loadContent = (template: DashboardOutletDirective, item: Item) => {
-    if (!item.component) {
-      return;
-    }
-
-    const viewContainerRef = template.viewContainerRef;
-    viewContainerRef.clear();
-
-    const componentType = dashboardCards[item.component];
-    const componentRef = viewContainerRef.createComponent(componentType);
-    const instance = componentRef.instance as DashboardCardContainer;
-    instance.item = item;
-  };
 }
