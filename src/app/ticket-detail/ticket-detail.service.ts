@@ -15,6 +15,11 @@ const ticketSummaries: TicketSummary[] = [
     assignee: 'Luuk Moret',
     status: 'open',
   },
+  {
+    id: '3',
+    assignee: 'Joris Compernol',
+    status: 'on hold',
+  },
 ];
 
 @Injectable({ providedIn: 'root' })

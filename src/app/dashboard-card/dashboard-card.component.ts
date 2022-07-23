@@ -8,7 +8,17 @@ import { dashboardCardsRegistry } from '../dashboard-cards-registry';
   styleUrls: ['./dashboard-card.component.scss'],
 })
 export class DashboardCardComponent {
-  @Input() item: Item;
+  dynamicItem: Item;
+
+  @Input() set item(value: Item) {
+    this.dynamicItem = {
+      ...value,
+      outputs: {
+        loading: (isLoading: boolean) =>
+          console.log(`${this.dynamicItem.component} is loading: ${isLoading}`),
+      },
+    };
+  }
 
   mapToComponent(component: string): Type<any> {
     return dashboardCardsRegistry[component];

@@ -1,5 +1,4 @@
-import { Component, OnInit, Type } from '@angular/core';
-import { dashboardCardsRegistry } from '../dashboard-cards-registry';
+import { Component } from '@angular/core';
 
 import { Track } from '../models/track';
 
@@ -15,18 +14,10 @@ export class DashboardComponent {
         {
           component: 'AssetDetailComponent',
           inputs: { id: '1' },
-          outputs: {
-            loading: (isLoading: boolean) =>
-              console.log(`AssetDetailComponent 1 loading: ${isLoading}`),
-          },
         },
         {
           component: 'AssetDetailComponent',
           inputs: { id: '2' },
-          outputs: {
-            loading: (isLoading: boolean) =>
-              console.log(`AssetDetailComponent 1 loading: ${isLoading}`),
-          },
         },
       ],
     },
@@ -35,18 +26,14 @@ export class DashboardComponent {
         {
           component: 'TicketDetailComponent',
           inputs: { id: '1' },
-          outputs: {
-            loading: (isLoading: boolean) =>
-              console.log(`TicketDetailComponent 1 loading: ${isLoading}`),
-          },
         },
         {
           component: 'TicketDetailComponent',
           inputs: { id: '2' },
-          outputs: {
-            loading: (isLoading: boolean) =>
-              console.log(`TicketDetailComponent 2 loading: ${isLoading}`),
-          },
+        },
+        {
+          component: 'TicketDetailComponent',
+          inputs: { id: '3' },
         },
       ],
     },
