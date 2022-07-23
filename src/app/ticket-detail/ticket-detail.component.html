@@ -1,1 +1,14 @@
-<p>ticket-detail works!</p>
+<p>ticket-detail</p>
+<ng-container *ngIf="vm$ | async as vm">
+  <div *ngIf="!vm.loading else loading">
+    <div>id: {{vm.summary?.id }}</div>
+    <div>assignee: {{vm.summary?.assignee }}</div>
+    <div>status: {{vm.summary?.status }}</div>
+  </div>
+
+</ng-container>
+
+
+<ng-template #loading>
+  Loading data....
+</ng-template>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, Type } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { dashboardCardsRegistry } from '../dashboard-cards-registry';
 
 import { Track } from '../models/track';
@@ -8,25 +8,21 @@ import { Track } from '../models/track';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   tracks: Track[] = [
     {
       items: [
-        { component: 'AssetDetailComponent' },
-        { component: 'AssetDetailComponent' },
+        { component: 'AssetDetailComponent', inputs: { id: '1' } },
+        { component: 'AssetDetailComponent', inputs: { id: '2' } },
       ],
     },
     {
       items: [
-        { component: 'TicketDetailComponent' },
-        { component: 'TicketDetailComponent' },
+        { component: 'TicketDetailComponent', inputs: { id: '1' } },
+        { component: 'TicketDetailComponent', inputs: { id: '2' } },
       ],
     },
   ];
-
-  constructor(private cd: ChangeDetectorRef) {}
-
-  ngOnInit(): void {}
 
   mapToComponent(component: string): Type<any> {
     return dashboardCardsRegistry[component];

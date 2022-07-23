@@ -5,9 +5,10 @@
                            [ndcDynamicInputs]="widget.inputs"
                    [ndcDynamicOutputs]="widget.outputs"
        -->
-      <ndc-dynamic [ndcDynamicComponent]="mapToComponent(item.component)"
-
-                   ></ndc-dynamic>
+      <ndc-dynamic
+        [ndcDynamicComponent]="mapToComponent(item.component)"
+        [ndcDynamicInputs]="item.inputs">
+      </ndc-dynamic>
     </div>
   </div>
 </div>

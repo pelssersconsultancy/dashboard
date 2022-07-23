@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TicketDetailStore } from './ticket-detail.store';
 
 @Component({
@@ -7,14 +7,15 @@ import { TicketDetailStore } from './ticket-detail.store';
   styleUrls: ['./ticket-detail.component.scss'],
   providers: [TicketDetailStore],
 })
-export class TicketDetailComponent implements OnInit {
+export class TicketDetailComponent {
   @Input() set id(value: string) {
+    console.log(`TicketDetailComponent set id ${value}`);
     this.store.setId(value);
   }
+
+  vm$ = this.store.vm$;
 
   constructor(private store: TicketDetailStore) {
     console.log('constructed TicketDetailComponent');
   }
-
-  ngOnInit(): void {}
 }

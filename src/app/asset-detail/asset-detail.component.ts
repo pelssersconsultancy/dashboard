@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AssetDetailStore } from './asset-detail.store';
 
 @Component({
@@ -7,14 +7,15 @@ import { AssetDetailStore } from './asset-detail.store';
   styleUrls: ['./asset-detail.component.scss'],
   providers: [AssetDetailStore],
 })
-export class AssetDetailComponent implements OnInit {
+export class AssetDetailComponent {
   @Input() set id(value: string) {
+    console.log(`AssetDetailComponent set id ${value}`);
     this.store.setId(value);
   }
+
+  vm$ = this.store.vm$;
 
   constructor(private store: AssetDetailStore) {
     console.log('constructed AssetDetailComponent');
   }
-
-  ngOnInit(): void {}
 }

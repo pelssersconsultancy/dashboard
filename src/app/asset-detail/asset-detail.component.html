@@ -1,2 +1,15 @@
 <p>asset-detail</p>
 
+<ng-container *ngIf="vm$ | async as vm">
+  <div *ngIf="!vm.loading else loading">
+    <div>id: {{vm.summary?.id }}</div>
+    <div>name: {{vm.summary?.name }}</div>
+    <div>description: {{vm.summary?.description }}</div>
+  </div>
+
+</ng-container>
+
+
+<ng-template #loading>
+  Loading data....
+</ng-template>
