@@ -17,20 +17,23 @@ import { takeUntil, tap } from 'rxjs/operators';
 })
 export class TicketDetailComponent implements OnDestroy {
   @Input() set id(value: string) {
-    console.log(`TicketDetailComponent set id ${value}`);
     this.store.setId(value);
   }
 
   @Output() loading = new EventEmitter<boolean>();
 
+  @Output() clicked = new EventEmitter<void>();
+
   destroy$ = new Subject<void>();
   vm$ = this.store.vm$;
 
   constructor(private store: TicketDetailStore) {
-    console.log('constructed TicketDetailComponent');
     this.store.loading$
       .pipe(
-        tap((loading) => this.loading.emit(loading)),
+        tap((loading) => {
+          console.log(`ticket detail store emitting loading ${loading}`);
+          this.loading.emit(loading);
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();
@@ -39,5 +42,9 @@ export class TicketDetailComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  onClick(): void {
+    this.clicked.emit();
   }
 }

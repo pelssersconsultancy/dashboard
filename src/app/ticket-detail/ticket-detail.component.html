@@ -1,10 +1,11 @@
 <ng-container *ngIf="vm$ | async as vm">
   <div>
-    <p>ticket-detail</p>
+    <p>ticket-detail loading : {{vm.loading}}</p>
     <div *ngIf="!vm.loading">
       <div>id: {{vm.summary?.id }}</div>
       <div>assignee: {{vm.summary?.assignee }}</div>
       <div>status: {{vm.summary?.status }}</div>
     </div>
+    <div><button (click)="onClick()">click me</button></div>
   </div>
 </ng-container>
