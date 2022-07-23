@@ -23,6 +23,10 @@ export class TicketDetailStore extends ComponentStore<TicketDetailState> {
     filter(Boolean)
   );
 
+  readonly loading$: Observable<boolean> = this.select(
+    (state) => state.loading
+  );
+
   readonly vm$ = this.select((state) => ({
     loading: state.loading,
     summary: state.summary,

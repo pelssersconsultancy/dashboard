@@ -12,19 +12,43 @@ export class DashboardComponent {
   tracks: Track[] = [
     {
       items: [
-        { component: 'AssetDetailComponent', inputs: { id: '1' } },
-        { component: 'AssetDetailComponent', inputs: { id: '2' } },
+        {
+          component: 'AssetDetailComponent',
+          inputs: { id: '1' },
+          outputs: {
+            loading: (isLoading: boolean) =>
+              console.log(`AssetDetailComponent 1 loading: ${isLoading}`),
+          },
+        },
+        {
+          component: 'AssetDetailComponent',
+          inputs: { id: '2' },
+          outputs: {
+            loading: (isLoading: boolean) =>
+              console.log(`AssetDetailComponent 1 loading: ${isLoading}`),
+          },
+        },
       ],
     },
     {
       items: [
-        { component: 'TicketDetailComponent', inputs: { id: '1' } },
-        { component: 'TicketDetailComponent', inputs: { id: '2' } },
+        {
+          component: 'TicketDetailComponent',
+          inputs: { id: '1' },
+          outputs: {
+            loading: (isLoading: boolean) =>
+              console.log(`TicketDetailComponent 1 loading: ${isLoading}`),
+          },
+        },
+        {
+          component: 'TicketDetailComponent',
+          inputs: { id: '2' },
+          outputs: {
+            loading: (isLoading: boolean) =>
+              console.log(`TicketDetailComponent 2 loading: ${isLoading}`),
+          },
+        },
       ],
     },
   ];
-
-  mapToComponent(component: string): Type<any> {
-    return dashboardCardsRegistry[component];
-  }
 }

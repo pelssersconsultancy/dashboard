@@ -1,14 +1,5 @@
 <div class="board">
   <div *ngFor="let track of tracks" class="grid-row">
-    <div *ngFor="let item of track.items" class="grid-cell">
-       <!--
-                           [ndcDynamicInputs]="widget.inputs"
-                   [ndcDynamicOutputs]="widget.outputs"
-       -->
-      <ndc-dynamic
-        [ndcDynamicComponent]="mapToComponent(item.component)"
-        [ndcDynamicInputs]="item.inputs">
-      </ndc-dynamic>
-    </div>
+    <app-dashboard-card [item]="item" *ngFor="let item of track.items"></app-dashboard-card>
   </div>
 </div>
